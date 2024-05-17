@@ -1,0 +1,11 @@
+<ul>
+    <li *ngFor="let question of questions">
+      <h3>{{ question.title }}</h3>
+      <p>{{ question.content }}</p>
+      <p>Upvotes: {{ question.upVotes }}</p>
+      <p>Downvotes: {{ question.downVotes }}</p>
+      <button (click)="upvoteQuestion(question.id)">Upvote</button>
+      <button (click)="downvoteQuestion(question.id)">Downvote</button>
+    </li>
+  </ul>
+  

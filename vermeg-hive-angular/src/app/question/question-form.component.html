@@ -1,0 +1,10 @@
+<form (submit)="createQuestion()">
+    <label for="title">Title:</label>
+    <input type="text" id="title" name="title" [(ngModel)]="question.title" required>
+  
+    <label for="content">Content:</label>
+    <textarea id="content" name="content" [(ngModel)]="question.content" required></textarea>
+  
+    <button type="submit">Create Question</button>
+  </form>
+  
