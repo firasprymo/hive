@@ -35,7 +35,7 @@ export class QuestionListComponent implements OnInit {
           this.questions[index] = updatedQuestion;
         }
       },
-      (error) => {
+      (error: any) => {
         console.error('Error upvoting question:', error);
       }
     );
@@ -49,7 +49,7 @@ export class QuestionListComponent implements OnInit {
           this.questions[index] = updatedQuestion;
         }
       },
-      (error) => {
+      (error: any) => {
         console.error('Error downvoting question:', error);
       }
     );

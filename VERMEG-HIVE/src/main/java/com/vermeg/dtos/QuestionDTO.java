@@ -1,25 +1,19 @@
 package com.vermeg.dtos;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
-@Getter
-@Setter
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class QuestionDTO {
 
     private Long id;
     private String title;
     private String content;
+    private String priority;
     private LocalDateTime createdAt;
 
-    // No-args constructor
-    public QuestionDTO() {}
 
-    // Constructor with title and content
-    public QuestionDTO(String title, String content) {
-        this.title = title;
-        this.content = content;
-    }
 }

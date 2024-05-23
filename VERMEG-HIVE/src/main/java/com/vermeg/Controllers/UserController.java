@@ -2,16 +2,18 @@ package com.vermeg.Controllers;
 
 import com.vermeg.dtos.SignupDTO;
 import com.vermeg.dtos.UserDTO;
-import com.vermeg.services.user.UserService;
+import com.vermeg.entities.AppUser;
+import com.vermeg.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api/v1/users")
 public class UserController {
 
     @Autowired
@@ -34,10 +36,8 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<UserDTO> createUser(@RequestBody SignupDTO signupDTO) {
-        // Create a new user using the provided signupDTO
-        UserDTO createdUser = userService.createUser(signupDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
+    public ResponseEntity<AppUser> createUser(@RequestBody SignupDTO signupDTO) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(userService.createUser(signupDTO));
     }
 
     @PutMapping("/{id}")
@@ -48,6 +48,10 @@ public class UserController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+    @GetMapping("/Me")
+    public ResponseEntity<AppUser> getUser() {
+        return ResponseEntity.ok(userService.getUser());
     }
 
     @DeleteMapping("/{id}")

@@ -18,12 +18,11 @@ export class QuestionDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
-      const questionId = +params.get('id');
-      this.loadQuestion(questionId);
+      this.loadQuestion(params.get('id'));
     });
   }
 
-  loadQuestion(questionId: number): void {
+  loadQuestion(questionId: any): void {
     this.questionService.getQuestionById(questionId).subscribe(
       (question: Question) => {
         this.question = question;

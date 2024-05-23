@@ -22,4 +22,14 @@ export class QuestionService {
   createQuestion(question: Question): Observable<Question> {
     return this.http.post<Question>(`${this.apiUrl}`, question);
   }
+
+  upvoteQuestion(questionId: number) {
+    return this.http.post<Question>(`${this.apiUrl}`, questionId);
+
+  }
+
+  downvoteQuestion(questionId: number) {
+    return this.http.post<Question>(`${this.apiUrl}`, questionId);
+
+  }
 }

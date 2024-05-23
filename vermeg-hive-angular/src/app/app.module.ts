@@ -26,21 +26,11 @@ import { SidebarComponent } from './layouts/full/sidebar/sidebar.component';
 import { HeaderComponent } from './layouts/full/header/header.component';
 import { BrandingComponent } from './layouts/full/sidebar/branding.component';
 import { AppNavItemComponent } from './layouts/full/sidebar/nav-item/nav-item.component';
-import { AppTooltipsComponent } from './ui-components/tooltips/tooltips.component';
 import { NavService } from './services/nav.service';
 import { ApiService } from './api.service';
 import { MaterialModule } from './material.module';
 import {TablerIconsModule} from 'angular-tabler-icons';
-
-const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent },
-  { path: 'signup', component: SignupComponent },
-  { path: 'dashboard', component: AppDashboardComponent },
-  { path: 'questions', component: QuestionListComponent },
-  { path: 'questions/:id', component: QuestionDetailComponent },
-  // Add more routes as needed
-];
+import {routes} from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -55,8 +45,6 @@ const routes: Routes = [
     HeaderComponent,
     BrandingComponent,
     AppNavItemComponent,
-    AppTooltipsComponent,
-    // Add more components here
   ],
   imports: [
     BrowserModule,
@@ -75,7 +63,6 @@ const routes: Routes = [
     ReactiveFormsModule,
     MaterialModule,
     RouterModule.forRoot(routes),
-    TablerIconsModule,
   ],
   providers: [ApiService, NavService],
   bootstrap: [AppComponent],
