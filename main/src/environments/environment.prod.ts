@@ -1,0 +1,22 @@
+export const environment = {
+    production: true,
+    apiUrl : 'https://karia.com.tn:8089/api/v1/',
+    apiImg: 'https://karia.com.tn:8089/',
+    users: 'users',
+    username: 'username',
+    auth: 'auth',
+    accessToken: 'accessToken',
+    servicesRequest: 'services-request',
+    servicesTypes: 'services-types',
+    supplier: 'suppliers',
+    trainers: 'trainers',
+    skills: 'skills',
+    documents: 'api/documents',
+    nomenclatures: 'api/nomenclatures',
+    centreArchives: 'api/centre-archives',
+    centrePreArchives: 'api/centre-pre-archives',
+    documentRequests: 'api/document-requests',
+    steps: 'steps',
+    activeUser: 'activeUser',
+    agences: 'api/agences'
+};

@@ -1,0 +1,28 @@
+<mat-card class="cardWithShadow theme-card " style="height: 80vh">
+  <mat-card-header>
+    <mat-card-title class="m-b-0">{{ question?.title }}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="b-t-1 bg-light" *ngFor="let item of question?.reponses">
+    <mat-card-title class="">
+      <h3 class="f-w-500 text-muted pl-5">{{ item?.content }}</h3>
+    </mat-card-title >
+    <mat-card-header style="display:flex;justify-content: end ">
+      <span class="f-w-500 text-muted text-end">answered {{ item?.createdAt | date:'MMM d, y \'at\' HH:mm' }}</span>
+    </mat-card-header>
+  </mat-card-content>
+  <mat-card-content style="margin-bottom: 0;
+    margin-top: auto;">
+    <form [formGroup]="formReponse">
+
+      <mat-form-field appearance="outline" class="w-100" color="primary">
+        <input matInput [formControlName]="'content'" placeholder="Ajouter commentaire"/>
+        <mat-error>
+          Email is required
+        </mat-error>
+      </mat-form-field>
+    </form>
+    <a (click)="addReponse()" mat-flat-button color="primary" class="w-50">
+      Add question
+    </a>
+  </mat-card-content>
+</mat-card>

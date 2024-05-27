@@ -1,0 +1,44 @@
+<div
+  class="position-relative row w-100 h-100 bg-gredient justify-content-center"
+>
+  <div class="col-lg-8 d-flex align-items-center">
+    <mat-card class="cardWithShadow boxed-auth">
+
+      <mat-card-content class="p-32">
+        <mat-card-title>Add question</mat-card-title>
+        <form class="m-t-30" [formGroup]="formQuestion">
+          <mat-form-field appearance="outline" class="w-100" color="primary">
+            <input matInput [formControlName]="'title'" placeholder="Titre de question"/>
+            <mat-error *ngIf="formQuestion.get('title')?.hasError('required')">
+              Email is required
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="w-100" color="primary">
+            <textarea matInput [formControlName]="'content'" placeholder="Contenue de question"></textarea>
+            <mat-error *ngIf="formQuestion.get('content')?.hasError('required')">
+              Email is required
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="w-100" color="primary">
+            <select matNativeControl placeholder="Choisir priorité" formControlName="priority">
+              <option value="" disabled>Choisir priorité</option>
+              <option value="low">{{ 'low'| titlecase }}</option>
+              <option value="medium">{{ 'medium'| titlecase }}</option>
+              <option value="high">{{ 'high'| titlecase }}</option>
+              <option value="critical">{{ 'critical'| titlecase }}</option>
+              <option value="moderate">{{ 'moderate'| titlecase }}</option>
+            </select>
+            <mat-error *ngIf="formQuestion.get('priority')?.hasError('required')">
+              Email is required
+            </mat-error>
+          </mat-form-field>
+          <a (click)="addQuestion()" mat-flat-button color="primary" class="w-50">
+            Add question
+          </a>
+          <!-- input -->
+        </form>
+
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
