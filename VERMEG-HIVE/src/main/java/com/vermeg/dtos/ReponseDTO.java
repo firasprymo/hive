@@ -1,21 +1,18 @@
 package com.vermeg.dtos;
 
 import com.vermeg.entities.AppUser;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class QuestionDTO {
-
+public class ReponseDTO {
     private Long id;
-    private String title;
     private String content;
-    private String priority;
+    private LocalDateTime createdAt = LocalDateTime.now();
     private AppUser user;
 
 }

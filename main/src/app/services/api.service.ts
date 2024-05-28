@@ -14,6 +14,7 @@ export class ApiService {
     public static apiPicture = environment.apiImg;
     public static apiUser =ApiService.apiVersion + environment.users;
     public static apiQuestions = ApiService.apiVersion + environment.questions;
+    public static apiReponses = ApiService.apiVersion + environment.reponses;
 
     token: any;
 

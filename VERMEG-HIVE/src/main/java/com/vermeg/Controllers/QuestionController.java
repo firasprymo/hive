@@ -23,7 +23,7 @@ public class QuestionController {
         this.questionService = questionService;
     }
 
-    @GetMapping
+    @GetMapping("")
     public ResponseEntity<List<Question>> getAllQuestions() {
         List<Question> questions = questionService.getAllQuestions();
         return ResponseEntity.ok(questions);
@@ -31,13 +31,15 @@ public class QuestionController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Question> getQuestionById(@PathVariable Long id) {
-        Optional<Question> optionalQuestion = questionService.getQuestionById(id);
-        if (optionalQuestion.isPresent()) {
-            Question question = optionalQuestion.get();
-            return ResponseEntity.ok(question);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        return ResponseEntity.ok(questionService.getQuestionById(id));
+
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteQuestion(@PathVariable Long id) {
+        questionService.deleteQuestion(id);
+        return ResponseEntity.ok().build();
+
     }
 
     @PatchMapping("/add-reponse-question/{id}")
@@ -51,26 +53,23 @@ public class QuestionController {
         return ResponseEntity.status(HttpStatus.CREATED).body(questionService.saveQuestion(questionDTO));
     }
 
+    @PatchMapping("/")
+    public ResponseEntity<Question> editQuestion(@RequestBody QuestionDTO questionDTO) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(questionService.updateQuestion(questionDTO));
+    }
+
     // Helper method to convert QuestionDTO to Questions entity
 
 
-    @PostMapping("/{questionId}/upvote")
-    public ResponseEntity<?> upvoteQuestion(@PathVariable Long questionId) {
-        Question updatedQuestion = questionService.upVoteQuestion(questionId);
-        if (updatedQuestion != null) {
-            return ResponseEntity.ok(updatedQuestion);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    @PatchMapping("/vote_up_question")
+    public ResponseEntity<?> upvoteQuestion(@RequestBody Question question) {
+        Question updatedQuestion = questionService.upVoteQuestion(question);
+        return ResponseEntity.ok(updatedQuestion);
     }
 
-    @PostMapping("/{questionId}/downvote")
-    public ResponseEntity<?> downvoteQuestion(@PathVariable Long questionId) {
-        Question updatedQuestion = questionService.downVoteQuestion(questionId);
-        if (updatedQuestion != null) {
-            return ResponseEntity.ok(updatedQuestion);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    @PatchMapping("/vote_down_question")
+    public ResponseEntity<?> downvoteQuestion(@RequestBody Question question) {
+        Question updatedQuestion = questionService.downVoteQuestion(question);
+        return ResponseEntity.ok(updatedQuestion);
     }
 }

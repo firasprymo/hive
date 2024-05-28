@@ -8,6 +8,7 @@ export const environment = {
     accessToken: 'accessToken',
     assets: 'assets',
     questions: 'questions',
+    reponses: 'reponses',
     activeUser: 'activeUser',
 
 

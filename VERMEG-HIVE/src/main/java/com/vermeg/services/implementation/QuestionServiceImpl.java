@@ -9,6 +9,7 @@ import com.vermeg.repositories.ReponseRepository;
 import com.vermeg.services.QuestionService;
 import com.vermeg.services.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -30,8 +31,9 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public Optional<Question> getQuestionById(Long id) {
-        return questionRepository.findById(id);
+    public Question getQuestionById(Long id) {
+        return questionRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Question not found with id: " + id));
     }
 
     @Override
@@ -54,22 +56,34 @@ public class QuestionServiceImpl implements QuestionService {
         if (questionOptional.isEmpty()) {
             throw new IllegalArgumentException("Question unvaillable");
         }
+        AppUser user = userService.getUser();
+
         Question question = questionOptional.get();
         Reponse reponse = Reponse.builder()
+                .user(user)
                 .content(reponseDTO.getContent())
                 .createdAt(LocalDateTime.now())
                 .build();
+        reponse.setQuestion(question);
         reponse = reponseRepository.save(reponse);
         question.getReponses().add(reponse);
         return questionRepository.save(question);
     }
 
     @Override
-    public Question updateQuestion(Long id, Question updatedQuestion) {
-        Optional<Question> existingQuestion = questionRepository.findById(id);
+    public Question updateQuestion(QuestionDTO updatedQuestion) {
+        Optional<Question> existingQuestion = questionRepository.findById(updatedQuestion.getId());
+        AppUser user = userService.getUser();
+
         if (existingQuestion.isPresent()) {
-            updatedQuestion.setId(id);
-            return questionRepository.save(updatedQuestion);
+            Question questionFinal = existingQuestion.get();
+            questionFinal.setTitle(updatedQuestion.getTitle());
+            questionFinal.setContent(updatedQuestion.getContent());
+            questionFinal.setPriority(updatedQuestion.getPriority());
+            if (questionFinal.getUser() == null) {
+                questionFinal.setUser(user);
+            }
+            return questionRepository.save(questionFinal);
         }
         return null; // Handle not found scenario appropriately
     }
@@ -80,8 +94,8 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public Question upVoteQuestion(Long questionId) {
-        Optional<Question> optionalQuestion = questionRepository.findById(questionId);
+    public Question upVoteQuestion(Question questionRequest) {
+        Optional<Question> optionalQuestion = questionRepository.findById(questionRequest.getId());
         if (optionalQuestion.isPresent()) {
             Question question = optionalQuestion.get();
             question.setUpVotes(question.getUpVotes() + 1);
@@ -91,8 +105,8 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public Question downVoteQuestion(Long questionId) {
-        Optional<Question> optionalQuestion = questionRepository.findById(questionId);
+    public Question downVoteQuestion(Question questionRequest) {
+        Optional<Question> optionalQuestion = questionRepository.findById(questionRequest.getId());
         if (optionalQuestion.isPresent()) {
             Question question = optionalQuestion.get();
             question.setDownVotes(question.getDownVotes() + 1);
