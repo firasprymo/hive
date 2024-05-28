@@ -2,6 +2,7 @@ import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {ApiService} from './api.service';
+import {Question} from '../shared/model/question.types';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class QuestionService {
     return this.http.get<any[]>(`${ApiService.apiQuestions}`);
   }
 
-  getQuestionById(id: number): Observable<any> {
+  getQuestionById(id: number | undefined): Observable<any> {
     const url = `${ApiService.apiQuestions}/${id}`;
     return this.http.get<any>(url);
   }
@@ -30,12 +31,17 @@ export class QuestionService {
   }
 
   updateQuestion(question: any): Observable<any> {
-    const url = `${ApiService.apiQuestions}/${question.id}`;
-    return this.http.put<any>(url, question);
+    return this.http.patch(`${ApiService.apiQuestions}/`, question);
+
   }
 
   deleteQuestion(id: number): Observable<any> {
-    const url = `${ApiService.apiQuestions}/${id}`;
-    return this.http.delete<any>(url);
+    return this.http.delete(`${ApiService.apiQuestions}/${id}`);
+  }
+  voteUpQuestion(question: Question): Observable<any> {
+    return this.http.patch(`${ApiService.apiQuestions}/vote_up_question/`,question);
+  }
+  voteDownQuestion(question: Question): Observable<any> {
+    return this.http.patch(`${ApiService.apiQuestions}/vote_down_question/`,question);
   }
 }

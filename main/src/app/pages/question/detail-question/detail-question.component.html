@@ -2,13 +2,34 @@
   <mat-card-header>
     <mat-card-title class="m-b-0">{{ question?.title }}</mat-card-title>
   </mat-card-header>
-  <mat-card-content class="b-t-1 bg-light" *ngFor="let item of question?.reponses">
-    <mat-card-title class="">
-      <h3 class="f-w-500 text-muted pl-5">{{ item?.content }}</h3>
-    </mat-card-title >
-    <mat-card-header style="display:flex;justify-content: end ">
+  <mat-card-content class="b-t-1 bg-light" style="padding-top: 0;
+   padding-bottom: 0;"
+                    *ngFor="let item of question?.reponses;let i = index">
+    <mat-card-title style="display: flex;justify-content: space-between">
+
+      <h3>{{ item?.content }}</h3>
+      <button
+        mat-flat-button
+        color="primary"
+        class="m-t-8"
+        [matMenuTriggerFor]="menu"
+      >
+        <mat-icon>more_vert</mat-icon>
+      </button>
+    </mat-card-title>
+    <mat-card-subtitle>
+    </mat-card-subtitle>
+    <mat-card-content style="display:flex;justify-content: space-between;margin-top: 0;padding-top: 0;padding-left: 0;padding-right: 0; ">
+      <span class="f-w-500 text-muted text-end"> {{ item?.user?.username }}</span>
       <span class="f-w-500 text-muted text-end">answered {{ item?.createdAt | date:'MMM d, y \'at\' HH:mm' }}</span>
-    </mat-card-header>
+    </mat-card-content>
+    <mat-card-content style="padding: 0">
+
+      <mat-menu #menu="matMenu" class="cardWithShadow">
+        <button mat-menu-item (click)="removeReponse(item.id, i)">Supprimer</button>
+        <button mat-menu-item (click)="setContent(item)">Modifier</button>
+      </mat-menu>
+    </mat-card-content>
   </mat-card-content>
   <mat-card-content style="margin-bottom: 0;
     margin-top: auto;">
@@ -21,8 +42,14 @@
         </mat-error>
       </mat-form-field>
     </form>
-    <a (click)="addReponse()" mat-flat-button color="primary" class="w-50">
-      Add question
+    <a *ngIf="isUpdating ;else NoUpdating" (click)="editReponse()" mat-flat-button color="warn" class="w-50">
+      update comment
     </a>
+    <ng-template #NoUpdating>
+
+      <a (click)="addReponse()" mat-flat-button color="primary" class="w-50">
+        Add comment
+      </a>
+    </ng-template>
   </mat-card-content>
 </mat-card>

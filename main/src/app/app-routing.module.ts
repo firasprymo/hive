@@ -24,6 +24,11 @@ const routes: Routes = [
           import('./pages/question/add-question/add-question.module').then((m) => m.AddQuestionModule),
       },
       {
+        path: 'edit-question/:id',
+        loadChildren: () =>
+          import('./pages/question/add-question/add-question.module').then((m) => m.AddQuestionModule),
+      },
+      {
         path: 'detail-question/:id',
         loadChildren: () =>
           import('./pages/question/detail-question/detail-question.module').then((m) => m.DetailQuestionModule),

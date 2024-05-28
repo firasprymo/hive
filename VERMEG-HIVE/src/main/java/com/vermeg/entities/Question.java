@@ -1,17 +1,21 @@
 package com.vermeg.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Builder
 @Table(name = "questions")
-public class Question {
+public class Question implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,7 +34,8 @@ public class Question {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private AppUser user;
-    @OneToMany(fetch = FetchType.EAGER)
-    private List<Reponse> reponses;
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private List<Reponse> reponses = new ArrayList<>();
 
 }

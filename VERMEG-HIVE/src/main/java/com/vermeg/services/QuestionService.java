@@ -10,18 +10,18 @@ public interface QuestionService {
 
     List<Question> getAllQuestions();
 
-    Optional<Question> getQuestionById(Long id);
+    Question getQuestionById(Long id);
 
     List<Question> searchQuestions(String keyword);
 
     Question saveQuestion(QuestionDTO question);
     Question addReponseQuestion(Long id, Reponse reponse);
 
-    Question updateQuestion(Long id, Question updatedQuestion);
+    Question updateQuestion(QuestionDTO updatedQuestion);
 
     void deleteQuestion(Long id);
 
-    Question upVoteQuestion(Long questionId);
+    Question upVoteQuestion(Question question);
 
-    Question downVoteQuestion(Long questionId);
+    Question downVoteQuestion(Question question);
 }

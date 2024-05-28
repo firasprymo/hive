@@ -32,9 +32,16 @@
               Email is required
             </mat-error>
           </mat-form-field>
-          <a (click)="addQuestion()" mat-flat-button color="primary" class="w-50">
-            Add question
+
+          <a *ngIf="isUpdating; else noUpdating" (click)="editQuestion()" mat-flat-button color="warn" class="w-50">
+            edit question
           </a>
+          <ng-template #noUpdating>
+
+            <a (click)="addQuestion()" mat-flat-button color="primary" class="w-50">
+              Add question
+            </a>
+          </ng-template>
           <!-- input -->
         </form>
 
