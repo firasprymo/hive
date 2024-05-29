@@ -1,6 +1,7 @@
 import {Component, ViewEncapsulation, ViewChild, OnInit} from '@angular/core';
 import {QuestionService} from '../../services/question.service';
 import {Question} from '../../shared/model/question.types';
+import {FormBuilder, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,16 +9,20 @@ import {Question} from '../../shared/model/question.types';
   encapsulation: ViewEncapsulation.None,
 })
 export class AppDashboardComponent implements OnInit {
-
+  formSearch: FormGroup
 
   displayedColumns: string[] = ['vote', 'assigned', 'title', 'priority', 'budget'];
   dataSource: Question[];
 
-  constructor(private questionService: QuestionService) {
+  constructor(private questionService: QuestionService,
+              private formBuilder: FormBuilder) {
   }
 
   ngOnInit(): void {
     this.getAllQuestions();
+    this.formSearch = this.formBuilder.group({
+      search: ['']
+    })
   }
 
   getAllQuestions() {
@@ -48,4 +53,41 @@ export class AppDashboardComponent implements OnInit {
     })
 
   }
+
+  filterQuestion() {
+    const lowercaseQuery = this.formSearch.value.search.trim().toLowerCase();
+    if (!lowercaseQuery) {
+      this.getAllQuestions(); // Assurez-vous de stocker les données originales dans originalDataSource
+      return;
+    }
+    let filteredQuestions: Question[] = this.dataSource.filter((question) => {
+      for (const key in question) {
+        if (question.hasOwnProperty(key)) {
+          const value = question[key];
+          // Vérifier si la valeur correspond à la recherche
+          if (this.valueMatchesSearch(value, lowercaseQuery)) {
+            return true;
+          }
+        }
+      }
+      return false;
+    });
+    this.dataSource = filteredQuestions;
+  }
+
+
+  private valueMatchesSearch(value: any, lowercaseQuery: string): boolean {
+    if (Array.isArray(value)) {
+      return value.some(item => this.valueMatchesSearch(item, lowercaseQuery));
+    } else if (typeof value === 'object' && value !== null) {
+      return Object.values(value).some(item => this.valueMatchesSearch(item, lowercaseQuery));
+    } else if (typeof value === 'string') {
+      return value.toLowerCase().includes(lowercaseQuery);
+    } else if (typeof value === 'number' || typeof value === 'boolean') {
+      return value.toString().toLowerCase().includes(lowercaseQuery);
+    }
+    return false;
+  }
+
+
 }
