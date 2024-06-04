@@ -6,7 +6,7 @@ import {MessageComponent} from './mesage/message.component';
 import {RouterModule} from '@angular/router';
 import {PagesRoutes} from '../pages.routing.module';
 import {chatRoutes} from './chat.routing.module';
-import { ChatComponent } from './chat/chat.component';
+import {ChatComponent} from './chat/chat.component';
 
 
 @NgModule({

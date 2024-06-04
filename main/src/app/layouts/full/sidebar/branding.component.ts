@@ -3,10 +3,10 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-branding',
   template: `
-    <div class="branding">
+    <div class="branding" style="width: 15rem">
       <a href="/">
-        <img
-          src="./assets/images/logos/dark-logo.svg"
+        <img style="width: 100%"
+          src="./assets/images/logos/logo.jpg"
           class="align-middle m-2"
           alt="logo"
         />
