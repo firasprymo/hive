@@ -1,6 +1,6 @@
 <mat-card class="cardWithShadow theme-card " style="height: 80vh">
   <mat-card-header>
-    <mat-card-title class="m-b-0">{{ question?.title }}</mat-card-title>
+    <mat-card-title class="m-b-0">{{ question.title }}</mat-card-title>
   </mat-card-header>
   <mat-card-content class="b-t-1 bg-light" style="padding-top: 0;
    padding-bottom: 0;"
@@ -26,7 +26,7 @@
     <mat-card-content style="padding: 0">
 
       <mat-menu #menu="matMenu" class="cardWithShadow">
-        <button mat-menu-item (click)="removeReponse(item.id, i)">Supprimer</button>
+        <button mat-menu-item (click)="removeResponse(item.id, i)">Supprimer</button>
         <button mat-menu-item (click)="setContent(item)">Modifier</button>
       </mat-menu>
     </mat-card-content>
@@ -42,7 +42,7 @@
         </mat-error>
       </mat-form-field>
     </form>
-    <a *ngIf="isUpdating ;else NoUpdating" (click)="editReponse()" mat-flat-button color="warn" class="w-50">
+    <a *ngIf="isUpdating ;else NoUpdating" (click)="editResponse()" mat-flat-button color="warn" class="w-50">
       update comment
     </a>
     <ng-template #NoUpdating>

@@ -4,14 +4,14 @@
     <i-tabler name="menu-2" class="icon-20 d-flex"></i-tabler>
   </button>
 
-  <button mat-icon-button aria-label="Notifications">
-    <i-tabler
-      class="d-flex"
-      name="bell"
-      matBadge="1"
-      matBadgeColor="primary"
-    ></i-tabler>
-  </button>
+<!--  <button mat-icon-button aria-label="Notifications">-->
+<!--    <i-tabler-->
+<!--      class="d-flex"-->
+<!--      name="bell"-->
+<!--      matBadge="1"-->
+<!--      matBadgeColor="primary"-->
+<!--    ></i-tabler>-->
+<!--  </button>-->
 
   <span class="flex-1-auto"></span>
 
@@ -33,9 +33,9 @@
       >My Profile
     </button>
     <button mat-menu-item>
-      <mat-icon class="d-flex align-items-center"
+      <mat-icon class="d-flex align-items-center" [routerLink]="['/chat']"
         ><i-tabler name="mail" class="icon-18 d-flex"></i-tabler></mat-icon
-      >My Account
+      >Contacter administrateur
     </button>
     <button mat-menu-item>
       <mat-icon class="d-flex align-items-center"
