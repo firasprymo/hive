@@ -4,25 +4,28 @@ import com.vermeg.dtos.SignupDTO;
 import com.vermeg.dtos.UserDTO;
 import com.vermeg.entities.AppUser;
 import com.vermeg.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/users")
+@RequiredArgsConstructor
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
     @GetMapping
     public ResponseEntity<List<UserDTO>> getAllUsers() {
         List<UserDTO> users = userService.getAllUsers();
         return ResponseEntity.ok(users);
+    }
+    @PostMapping("/sign-up")
+    public ResponseEntity<AppUser> createUser(@RequestBody SignupDTO signupDTO) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(userService.createUser(signupDTO));
     }
 
     @GetMapping("/{id}")
@@ -35,10 +38,6 @@ public class UserController {
         }
     }
 
-    @PostMapping
-    public ResponseEntity<AppUser> createUser(@RequestBody SignupDTO signupDTO) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(userService.createUser(signupDTO));
-    }
 
     @PutMapping("/{id}")
     public ResponseEntity<UserDTO> updateUser(@PathVariable Long id, @RequestBody UserDTO userDTO) {
