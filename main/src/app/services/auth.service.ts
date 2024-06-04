@@ -154,7 +154,8 @@ export class AuthService {
      * @param user
      */
     signUp(user: any): Observable<any> {
-        return this._httpClient.post(`${ApiService.apiVersion}${ApiService.apiUser}/sign-up`, user);
+      console.log(user)
+        return this._httpClient.post(`${ApiService.apiUser}/sign-up`, user);
     }
 
     /**
