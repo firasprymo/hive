@@ -1,16 +1,20 @@
 export const environment = {
-    production: false,
-    apiUrl : 'http://localhost:8080/api/v1/',
-    // apiUrl : 'https://karia.com.tn:8080/api/v1/',
-    apiImg: 'http://localhost:8080/',
-    users: 'users',
-    username: 'username',
-    accessToken: 'accessToken',
-    assets: 'assets',
-    questions: 'questions',
-    reponses: 'reponses',
-    activeUser: 'activeUser',
-
+  production: false,
+  apiUrl: 'http://localhost:8080/api/v1/',
+  // apiUrl : 'https://karia.com.tn:8080/api/v1/',
+  apiImg: 'http://localhost:8080/',
+  users: 'users',
+  username: 'username',
+  accessToken: 'accessToken',
+  assets: 'assets',
+  questions: 'questions',
+  reponses: 'reponses',
+  activeUser: 'activeUser',
+  dialogFlow: 'dialog-flow',
+  dialogflow: {
+    angularBot: '101736640813399733287',
+    projectId:'bee-sxtx'
+  }
 
 };
 

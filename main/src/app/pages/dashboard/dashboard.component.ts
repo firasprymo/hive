@@ -1,4 +1,4 @@
-import {Component, ViewEncapsulation, ViewChild, OnInit} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {QuestionService} from '../../services/question.service';
 import {Question} from '../../shared/model/question.types';
 import {FormBuilder, FormGroup} from '@angular/forms';
@@ -60,7 +60,7 @@ export class AppDashboardComponent implements OnInit {
       this.getAllQuestions(); // Assurez-vous de stocker les données originales dans originalDataSource
       return;
     }
-    let filteredQuestions: Question[] = this.dataSource.filter((question) => {
+    this.dataSource = this.dataSource.filter((question) => {
       for (const key in question) {
         if (question.hasOwnProperty(key)) {
           const value = question[key];
@@ -72,7 +72,6 @@ export class AppDashboardComponent implements OnInit {
       }
       return false;
     });
-    this.dataSource = filteredQuestions;
   }
 
 

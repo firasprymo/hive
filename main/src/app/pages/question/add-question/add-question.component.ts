@@ -26,8 +26,8 @@ export class AddQuestionComponent implements OnInit {
     })
     this.activatedRoute.params.subscribe((res: any) => {
       console.log(res?.id)
-      this.isUpdating = true;
       if (res?.id) {
+        this.isUpdating = true;
         this._questionService.getQuestionById(res?.id).subscribe(result => {
           console.log(result)
           this.formQuestion.patchValue({

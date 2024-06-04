@@ -53,7 +53,7 @@ export class DetailQuestionComponent implements OnInit {
     })
   }
 
-  removeReponse(id: number | undefined, index: number) {
+  removeResponse(id: number | undefined, index: number) {
     this.reponseService.removeReponse(id).subscribe(res => {
       this.question.reponses?.splice(index, 1);
     })
@@ -68,7 +68,7 @@ export class DetailQuestionComponent implements OnInit {
     })
   }
 
-  editReponse() {
+  editResponse() {
     this.reponseService.updateReponse(this.formReponse.value).subscribe(res => {
       console.log(res)
       this.formReponse.reset()

@@ -1,0 +1,35 @@
+.content-message {
+  display: flex;
+  margin-bottom: 10px;
+  //width: 80%;
+}
+
+.right-content {
+  justify-content: flex-end;
+}
+
+.left-content {
+  justify-content: flex-start;
+}
+
+p {
+  display: inline-block;
+  padding: 10px 15px;
+  border-radius: 20px;
+  max-width: 40%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  word-wrap: break-word;
+  margin: 0;
+}
+
+.right-content p {
+  margin-left: auto;
+  border-radius: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.left-content p {
+  margin-right: auto;
+  border-radius: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}

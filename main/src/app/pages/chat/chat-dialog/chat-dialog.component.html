@@ -1,0 +1,16 @@
+<form [formGroup]="formChat">
+  <div class="list-messages">
+    <div *ngFor="let message of messages" class="message-container">
+      <app-message class="message" [text]="message.text" [date]="message.createdAt" [colorBackRight]="colorBackRight"
+                   [colorFontRight]="colorFontRight"
+                   [colorBackLeft]="colorBackLeft" [colorFontLeft]="colorFontLeft" [owner]="message.user"
+                   [ngClass]="{'left-message': !message.user, 'right-message': message.user}"></app-message>
+    </div>
+  </div>
+  <div class="input-message form-group">
+    <input class="input-text-message form-input" [formControlName]="'textInput'"
+              name="textInput" placeholder="Type text here"
+              >
+    <button class="btn-send" type="button"  (click)="sendMessage()">Send</button>
+  </div>
+</form>

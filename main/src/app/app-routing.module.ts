@@ -34,6 +34,11 @@ const routes: Routes = [
           import('./pages/question/detail-question/detail-question.module').then((m) => m.DetailQuestionModule),
       },
       {
+        path: 'chat',
+        loadChildren: () =>
+          import('./pages/chat/chat.module').then((m) => m.ChatModule),
+      },
+      {
         path: 'ui-components',
         loadChildren: () =>
           import('./pages/ui-components/ui-components.module').then(
