@@ -23,6 +23,7 @@ public class DialogflowController {
 
     @PostMapping("/query")
     public ResponseEntity<ResponseMessage> query(@RequestBody MessageRequest query) throws IOException {
-            return ResponseEntity.status(HttpStatus.CREATED).body(dialogflowService.detectIntent(query));
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body(dialogflowService.detectIntent(query));
     }
 }
