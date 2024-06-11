@@ -3,26 +3,26 @@
 
     <mat-card class="cardWithShadow">
       <mat-card-header class="d-flex justify-content-between align-items-center">
-        <form [formGroup]="formSearch" class="flex-grow-1 me-3" style="
-  flex-grow: 1;
+        <form [formGroup]="formSearch" class="m-t-30 flex-grow-1 me-3" style="
+  flex-grow: 1; display: flex;justify-content: space-between;
   margin-right: 1rem;
 ">
 
-          <mat-form-field appearance="outline" class="w-100" color="primary">
+          <mat-form-field appearance="outline" class="w-75" color="primary" style="width: 74%">
             <input matInput [formControlName]="'search'" placeholder="Rechercher" (change)="filterQuestion()"/>
           </mat-form-field>
+          <mat-form-field appearance="outline" class="w-25" color="primary" (change)="filterPriorityQuestion()">
+            <select matNativeControl placeholder="Choisir priorité" formControlName="priority">
+              <option value="">All</option>
+              <option value="low">{{ 'low'| titlecase }}</option>
+              <option value="medium">{{ 'medium'| titlecase }}</option>
+              <option value="high">{{ 'high'| titlecase }}</option>
+              <option value="critical">{{ 'critical'| titlecase }}</option>
+              <option value="moderate">{{ 'moderate'| titlecase }}</option>
+            </select>
+          </mat-form-field>
         </form>
-        <button
-          style="margin-bottom: 2%"
-          mat-flat-button
-          color="primary"
-          #tooltip="matTooltip"
-          matTooltip="Info about the action"
-          matTooltipPosition="right"
-          routerLink="/add-question"
-        >
-          Ajouter question
-        </button>
+
       </mat-card-header>
       <mat-card-content class="p-24">
         <mat-card-title>Les questions</mat-card-title>
@@ -72,13 +72,21 @@
                     width="40"
                     class="rounded-circle"
                   />
-                  <div class="m-l-16">
+                  <div class="m-l-16" style="display: flex;flex-direction: column;">
                     <h6 class="mat-subtitle-1 f-s-14 f-w-600">
                       {{ element.title }}
                     </h6>
                     <span class="mat-body-1 f-s-12 " style="white-space: break-spaces">
                       {{ element.content }}
                     </span>
+                    <div style="display: flex; flex-direction: row; justify-content: space-between;">
+                    <span class="mat-body-1 f-s-10 f-w-200">
+                      {{ element.reponses.length }} réponses
+                    </span>
+                      <span class="mat-body-1 f-s-10 f-w-200">
+                     created at {{ element.createdAt | date:'MMM d, y \'at\' HH:mm' }}
+                    </span>
+                    </div>
                   </div>
                 </div>
               </td>

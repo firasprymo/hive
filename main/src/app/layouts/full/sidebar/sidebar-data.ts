@@ -13,5 +13,10 @@ export const navItems: NavItem[] = [
     displayName: 'Chat',
     iconName: 'mail',
     route: '/chat',
+  },
+  {
+    displayName: 'Ajouter question',
+    iconName: 'plus',
+    route: '/add-question',
   }
 ];

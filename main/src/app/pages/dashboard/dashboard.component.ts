@@ -21,7 +21,8 @@ export class AppDashboardComponent implements OnInit {
   ngOnInit(): void {
     this.getAllQuestions();
     this.formSearch = this.formBuilder.group({
-      search: ['']
+      search: [''],
+      priority: [''],
     })
   }
 
@@ -57,6 +58,25 @@ export class AppDashboardComponent implements OnInit {
   filterQuestion() {
     const lowercaseQuery = this.formSearch.value.search.trim().toLowerCase();
     if (!lowercaseQuery) {
+      this.getAllQuestions(); // Assurez-vous de stocker les données originales dans originalDataSource
+      return;
+    }
+    this.dataSource = this.dataSource.filter((question) => {
+      for (const key in question) {
+        if (question.hasOwnProperty(key)) {
+          const value = question[key];
+          // Vérifier si la valeur correspond à la recherche
+          if (this.valueMatchesSearch(value, lowercaseQuery)) {
+            return true;
+          }
+        }
+      }
+      return false;
+    });
+  }
+  filterPriorityQuestion() {
+    const lowercaseQuery = this.formSearch.value.priority.trim().toLowerCase();
+    if (!lowercaseQuery || this.formSearch.value.priority.trim().toLowerCase()!=lowercaseQuery) {
       this.getAllQuestions(); // Assurez-vous de stocker les données originales dans originalDataSource
       return;
     }
